@@ -50,7 +50,7 @@ dishRouter.route('/:dishId')
         Dishes.findById(req.params.dishId)
         .populate('comments.author')
         .then((dish) => {
-            console.log('Dish Created', dish);
+            console.log('Dish retrieved', dish);
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
             res.json(dish);
