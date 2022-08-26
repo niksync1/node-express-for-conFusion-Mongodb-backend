@@ -1,16 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+var authenticate = require('../authenticate');
 const cors = require('./cors');
 
 const Comments = require('../models/comments');
-var authenticate = require('../authenticate');
+
 const commentRouter = express.Router();
 
 commentRouter.use(bodyParser.json());
 
 commentRouter.route('/')
-.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+.options(cors.corsWithOptions, authenticate.verifyUser, authenticate.verifyAdmin, (req, res) => { res.sendStatus(200); })
 .get(cors.cors, (req,res,next) => {
     Comments.find(req.query)
     .populate('author')

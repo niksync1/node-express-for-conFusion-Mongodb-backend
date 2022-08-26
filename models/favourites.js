@@ -9,7 +9,7 @@ var favouriteSchema = new Schema({
     },
    dishes: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Dishes',
+        ref: 'Dish',
     }] 
 },{
     timestamps: true,

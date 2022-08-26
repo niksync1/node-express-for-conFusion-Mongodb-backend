@@ -9,8 +9,8 @@ const leaderRouter = express.Router();
 leaderRouter.use(bodyParser.json());
 
 leaderRouter.route('/')
-    .options(cors.corsWithOptions, (req,res) => { res.sendStatus(200); }) 
-    .get((req, res, next) => {
+    .options(cors.corsWithOptions, authenticate.verifyUser,(req,res) => { res.sendStatus(200); }) 
+    .get(cors.cors, (req, res, next) => {
         Leaders.find({})
         .then((leaders) => {
             res.statusCode = 200;
