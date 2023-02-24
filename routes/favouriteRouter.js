@@ -30,7 +30,7 @@ favouriteRouter.route('/')
 .post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     Favourites.findOneAndUpdate(
         {user : req.user._id},
-        {$push: { dishes : req.body._id} }
+        {$set: { dishes : req.body._id} }
         )
     .then((favourite) => {
     if (favourite != null){
